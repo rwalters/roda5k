@@ -1,0 +1,7 @@
+app:
+  build: .
+  volumes:
+    - .:/app
+  ports:
+    - "3000:3000"
+  command: "bundle exec unicorn -c config/unicorn.conf -E production"
