@@ -1,9 +1,12 @@
 require 'roda'
 
+Pathname.new("config").children.each do |config_file|
+  require config_file
+end
+
 class App < Roda
   # GET / request
-  route do |r|
-    r.root do
+  route do |r| r.root do
       r.redirect "/hello"
     end
 
