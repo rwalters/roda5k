@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
 gem "roda"
-gem "dry-types"
-gem 'unicorn'
+gem "rom-repository"
+gem "rom-sql"
+gem "dry-struct"
+gem "sqlite3"
+gem "unicorn"
