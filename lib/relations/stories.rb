@@ -11,6 +11,10 @@ module Relations
       attribute :updated_at,  TIMESTAMP
     end
 
+    def delete_all
+      delete
+    end
+
     def by_id(id)
       where(id: id)
     end

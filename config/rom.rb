@@ -1,7 +1,7 @@
 config = ROM::Configuration.new(:sql, "sqlite::memory")
 config.register_relation(Relations::Stories)
-container = ROM.container(config)
 
+container = ROM.container(config)
 container.gateways[:default].tap do |gateway|
   migration = gateway.migration do
     change do
