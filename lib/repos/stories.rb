@@ -1,3 +1,5 @@
+require 'entities/story'
+
 module Repos
   class Stories < ROM::Repository[:stories]
     # Define a command to create new stories.
@@ -8,6 +10,8 @@ module Repos
     end
 
     def all
+      debug("Get all Stories")
+
       stories
         .all
         .as(Story)
@@ -15,10 +19,18 @@ module Repos
     end
 
     def [](id)
+      debug("Get Stories for id: #{id}")
+
       stories
         .by_id(id)
         .as(Story)
         .one!
+    end
+
+    private
+
+    def debug(msg)
+      Roda5k.logger.warn("[%s] %s"%[self.class.name, msg])
     end
   end
 end

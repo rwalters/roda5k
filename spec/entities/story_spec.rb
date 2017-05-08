@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Story do
+  let(:repo) { Roda5k.repos[:stories] }
+
   subject do
     described_class.new(params)
   end

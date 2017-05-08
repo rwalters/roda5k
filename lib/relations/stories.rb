@@ -12,15 +12,27 @@ module Relations
     end
 
     def delete_all
+      debug("Delete All Stories")
+
       delete
     end
 
     def by_id(id)
+      debug("Get Stories for id: #{id}")
+
       where(id: id)
     end
 
     def all
+      debug("Get All Stories")
+
       order(:author, :title, :id)
+    end
+
+    private
+
+    def debug(msg)
+      Roda5k.logger.warn("[%s] %s"%[self.class.name, msg])
     end
   end
 end

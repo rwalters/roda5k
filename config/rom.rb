@@ -1,4 +1,7 @@
-config = ROM::Configuration.new(:sql, "sqlite::memory")
+require 'relations/stories'
+require 'repos/stories'
+
+config = ROM::Configuration.new(:sql, Roda5k.config.db.dsn)
 config.register_relation(Relations::Stories)
 
 container = ROM.container(config)
@@ -19,4 +22,6 @@ container.gateways[:default].tap do |gateway|
   migration.apply(gateway.connection, :up)
 end
 
-STORY_REPO = Repos::Stories.new(container)
+Roda5k.config.container = container
+
+Roda5k.config.repos[:stories] = Repos::Stories.new(container)

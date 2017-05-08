@@ -1,16 +1,18 @@
 require 'spec_helper'
 
 describe Relations::Stories do
-  let(:stories) { STORY_REPO.stories }
+  let(:repo) { Roda5k.repos[:stories] }
+
+  let(:stories) { repo.stories }
 
   before(:each) do
     authors.each do |name|
-      STORY_REPO.create(params.merge(author: name))
+      repo.create(params.merge(author: name))
     end
   end
 
   after(:each) do
-    STORY_REPO.delete_all
+    repo.delete_all
   end
 
   let(:authors) { %w(new test foo bar ultimate penultimate) }
@@ -23,7 +25,7 @@ describe Relations::Stories do
     subject do
       stories.by_id(book_record.id).to_a
     end
-    let(:book_record) { STORY_REPO.all.first }
+    let(:book_record) { repo.all.first }
 
     it "finds the right author" do
       expect(subject.first.author).to eq(authors.sort.first)
