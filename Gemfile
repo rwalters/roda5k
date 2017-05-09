@@ -6,6 +6,7 @@ gem "roda"
 gem "rom-repository"
 gem "rom-sql"
 gem "dry-struct"
+gem "dry-view"
 gem "dry-configurable", "~> 0.6"
 gem 'log_formatter'
 gem "sqlite3"
