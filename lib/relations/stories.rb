@@ -32,7 +32,7 @@ module Relations
     private
 
     def debug(msg)
-      Roda5k.logger.warn("[%s] %s"%[self.class.name, msg])
+      Roda5k.logger.debug("[#{self.class.name}]"){ msg }
     end
   end
 end

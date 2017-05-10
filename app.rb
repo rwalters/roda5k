@@ -22,7 +22,8 @@ class App < Roda
         begin
           StoryView.new.call({id: id})
         rescue ROM::TupleCountMismatchError => e
-          Roda5k.logger.error({message:"Error routing to ID '%s'"%[id], error: {class: e.class, message: e.message}})
+          Roda5k.logger.error("%s:%d"%[__FILE__, __LINE__]){ "Error routing to ID '%s'"%[id]}
+          Roda5k.logger.error("%s:%d"%[__FILE__, __LINE__]){ e }
 
           r.redirect '/'
         end
