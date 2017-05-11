@@ -17,7 +17,7 @@ describe Relations::Stories do
 
   let(:authors) { %w(new test foo bar ultimate penultimate) }
   let(:params) do
-    { title: 't title', body: 'blah' }
+    { title: 't title', body: 'body blah' }
   end
 
 

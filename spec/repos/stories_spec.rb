@@ -14,7 +14,7 @@ describe Repos::Stories do
   end
 
   let(:params) do
-    { title: 't title', body: 'blah' }
+    { title: 't title', body: 'foobar' }
   end
 
   let(:authors) { ['test author'] }

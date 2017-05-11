@@ -71,6 +71,32 @@ describe Story do
       end
     end
 
+    context "body field size contraint" do
+      context "body with between 5 and 5k" do
+        let(:body) { "a"*5100 }
+
+        it "passes" do
+          expect{subject}.not_to raise_error
+        end
+      end
+
+      context "body with over 5k" do
+        let(:body) { "a"*5200 }
+
+        it "passes" do
+          expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :body/)
+        end
+      end
+
+      context "body with under 5 characters" do
+        let(:body) { "a"*2 }
+
+        it "passes" do
+          expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :body/)
+        end
+      end
+    end
+
     context "body with integer" do
       let(:body) { 12 }
 
