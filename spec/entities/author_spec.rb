@@ -1,20 +1,19 @@
 require 'spec_helper'
+require 'entities/author'
 
-describe Story do
-  let(:repo) { Roda5k.repos[:stories] }
-
+describe Author do
   subject do
     described_class.new(params)
   end
 
   let(:params) do
-    { id: id, author: author, title: title, body: body, created_at: c_at, updated_at: u_at }
+    { id: id, first_name: first_name, last_name: last_name, bio: bio, created_at: c_at, updated_at: u_at }
   end
 
   let(:id)      { 1 }
-  let(:author)  { "valid" }
-  let(:title)   { "valid" }
-  let(:body)    { "valid" }
+  let(:first_name)  { "valid" }
+  let(:last_name)   { "valid" }
+  let(:bio)    { "valid" }
   let(:c_at)    { Time.now }
   let(:u_at)    { Time.now }
 
@@ -39,77 +38,77 @@ describe Story do
       end
     end
 
-    context "author with integer" do
-      let(:author) { 12 }
+    context "first_name with integer" do
+      let(:first_name) { 12 }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :author/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :first_name/)
       end
     end
 
-    context "author with nil" do
-      let(:author) { nil }
+    context "first_name with nil" do
+      let(:first_name) { nil }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :author/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :first_name/)
       end
     end
 
-    context "title with integer" do
-      let(:title) { 12 }
+    context "last_name with integer" do
+      let(:last_name) { 12 }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :title/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :last_name/)
       end
     end
 
-    context "title with nil" do
-      let(:title) { nil }
+    context "last_name with nil" do
+      let(:last_name) { nil }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :title/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :last_name/)
       end
     end
 
-    context "body field size contraint" do
-      context "body with between 5 and 5k" do
-        let(:body) { "a"*5100 }
+    context "bio field size contraint" do
+      context "bio with between 5 and 255" do
+        let(:bio) { "a"*254}
 
         it "passes" do
           expect{subject}.not_to raise_error
         end
       end
 
-      context "body with over 5k" do
-        let(:body) { "a"*5200 }
+      context "bio with over 5k" do
+        let(:bio) { "a"*256 }
 
         it "fails" do
-          expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :body/)
+          expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :bio/)
         end
       end
 
-      context "body with under 5 characters" do
-        let(:body) { "a"*2 }
+      context "bio with under 5 characters" do
+        let(:bio) { "a"*2 }
 
         it "fails" do
-          expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :body/)
+          expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :bio/)
         end
       end
     end
 
-    context "body with integer" do
-      let(:body) { 12 }
+    context "bio with integer" do
+      let(:bio) { 12 }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :body/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :bio/)
       end
     end
 
-    context "body with nil" do
-      let(:body) { nil }
+    context "bio with nil" do
+      let(:bio) { nil }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :body/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :bio/)
       end
     end
 

@@ -1,28 +1,28 @@
-require 'entities/story'
+require 'entities/author'
 
 module Repos
-  class Stories < ROM::Repository[:stories]
+  class Authors < ROM::Repository[:authors]
     commands :create, update: :by_id, delete: :by_id
 
     def delete_all
-      stories.delete_all
+      authors.delete_all
     end
 
     def all
-      debug("Get all Stories")
+      debug("Get all Authors")
 
-      stories
+      authors
         .all
-        .as(Story)
+        .as(Author)
         .to_a
     end
 
     def [](id)
-      debug("Get Stories for id: #{id}")
+      debug("Get Authors for id: #{id}")
 
-      stories
+      authors
         .by_id(id)
-        .as(Story)
+        .as(Author)
         .one!
     end
 

@@ -1,32 +1,32 @@
 module Relations
-  class Stories < ROM::Relation[:sql]
+  class Authors < ROM::Relation[:sql]
     TIMESTAMP = Types::Time.default { Time.now.utc }
 
-    schema(:stories) do
+    schema(:authors) do
       attribute :id,          Types::Serial
-      attribute :author,      Types::String
-      attribute :title,       Types::String
-      attribute :body,        Types::String
+      attribute :first_name,  Types::String
+      attribute :last_name,   Types::String
+      attribute :bio,         Types::String
       attribute :created_at,  TIMESTAMP
       attribute :updated_at,  TIMESTAMP
     end
 
     def delete_all
-      debug("Delete All Stories")
+      debug("Delete All Authors")
 
       delete
     end
 
     def by_id(id)
-      debug("Get Stories for id: #{id}")
+      debug("Get Authors for id: #{id}")
 
       where(id: id)
     end
 
     def all
-      debug("Get All Stories")
+      debug("Get All Authors")
 
-      order(:author, :title, :id)
+      order(:last_name, :first_name, :id)
     end
 
     private
