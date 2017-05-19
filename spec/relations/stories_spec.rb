@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe Relations::Stories do
   let(:repo) { Roda5k.repos[:stories] }
-
   let(:stories) { repo.stories }
+
+  before(:all) { Roda5k.repos[:authors].create(first_name: 'first', last_name: 'last', bio: 'short bio') }
+  after(:all)  { Roda5k.repos[:authors].delete_all }
 
   before(:each) do
     titles.each do |title|
@@ -15,9 +17,10 @@ describe Relations::Stories do
     repo.delete_all
   end
 
+  let(:author) { Roda5k.repos[:authors].all.first }
   let(:titles) { %w(new test foo bar ultimate penultimate) }
   let(:params) do
-    { author_id: 1, body: 'body blah' }
+    { author_id: author.id, body: 'body blah' }
   end
 
 

@@ -3,9 +3,8 @@ require 'spec_helper'
 describe Repos::Stories do
   let(:repo) { Roda5k.repos[:stories] }
 
-  after(:each) do
-    repo.delete_all
-  end
+  before(:all) { Roda5k.repos[:authors].create(first_name: 'first', last_name: 'last', bio: 'short bio') }
+  after(:all)  { Roda5k.repos[:authors].delete_all }
 
   before(:each) do
     titles.each do |title|
@@ -13,8 +12,13 @@ describe Repos::Stories do
     end
   end
 
+  after(:each) do
+    repo.delete_all
+  end
+
+  let(:author) { Roda5k.repos[:authors].all.first }
   let(:params) do
-    { author_id: 1, body: 'foobar' }
+    { author_id: author.id, body: 'foobar' }
   end
 
   let(:titles) { ['test title'] }

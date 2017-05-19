@@ -3,6 +3,7 @@ require 'entities/author'
 module Repos
   class Authors < ROM::Repository[:authors]
     commands :create, update: :by_id, delete: :by_id
+    relations :stories
 
     def delete_all
       authors.delete_all

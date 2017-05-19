@@ -13,7 +13,7 @@ container.gateways[:default].tap do |gateway|
     change do
       create_table :stories do
         primary_key :id
-        column :author_id,  Integer, null: false
+        foreign_key :author_id,  :authors
         column :title,      String, null: false
         column :body,       String, null: false
         column :created_at, Time,   null: false

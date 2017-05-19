@@ -4,7 +4,7 @@ module Relations
 
     schema(:stories) do
       attribute :id,          Types::Serial
-      attribute :author_id,   Types::Int
+      attribute :author_id,   Types::ForeignKey(:authors)
       attribute :title,       Types::String
       attribute :body,        Types::String
       attribute :created_at,  TIMESTAMP
@@ -22,15 +22,15 @@ module Relations
     end
 
     def by_id(id)
-      debug("Get Stories for id: #{id}")
+      debug("#{__callee__} for id: #{id}")
 
-      where(id: id)
+      by_pk(id)
     end
 
     def all
       debug("Get All Stories")
 
-      order(:title, :id)
+      order(stories[:title].qualified, stories[:id].qualified)
     end
 
     private

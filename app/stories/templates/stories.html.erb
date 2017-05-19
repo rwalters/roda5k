@@ -1,0 +1,8 @@
+<h1>All the Stories!</h1>
+<br />
+<p>
+<ul>
+  <% stories.each do |story| %>
+    <li><a href="<%= story.relative_url %>"><%= story.title %></a> by <%= story.author.first_name %></li>
+  <% end %>
+</ul>

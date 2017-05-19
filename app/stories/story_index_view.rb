@@ -1,13 +1,14 @@
 require "controllers/base_view"
+require_relative "parts/story_url"
 
-class StoryView < BaseView
+class StoryIndexView < BaseView
   configure do |config|
     config.paths = self.template_paths(__dir__) | config.paths
-    config.template = "story"
+    config.template = "stories"
   end
 
-  expose :story do |input|
-    repo.by_id_with_author(input[:id])
+  expose :stories, as: StoryUrl do
+    repo.all_with_author
   end
 
   def initialize(repo: Roda5k.repos[:stories])

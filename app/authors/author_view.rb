@@ -1,16 +1,16 @@
 require "controllers/base_view"
 
-class StoryView < BaseView
+class AuthorView < BaseView
   configure do |config|
     config.paths = self.template_paths(__dir__) | config.paths
-    config.template = "story"
+    config.template = "author"
   end
 
-  expose :story do |input|
-    repo.by_id_with_author(input[:id])
+  expose :author, as: AuthorName do |input|
+    repo[input[:id]]
   end
 
-  def initialize(repo: Roda5k.repos[:stories])
+  def initialize(repo: Roda5k.repos[:authors])
     super()
 
     @repo = repo

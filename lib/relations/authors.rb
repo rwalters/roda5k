@@ -30,7 +30,7 @@ module Relations
     def all
       debug("Get All Authors")
 
-      order(:last_name, :first_name, :id)
+      order(authors[:last_name].qualified, authors[:first_name].qualified, authors[:id].qualified)
     end
 
     private
