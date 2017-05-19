@@ -8,20 +8,20 @@ describe Repos::Stories do
   end
 
   before(:each) do
-    authors.each do |name|
-      repo.create(params.merge(author: name))
+    titles.each do |title|
+      repo.create(params.merge(title: title))
     end
   end
 
   let(:params) do
-    { title: 't title', body: 'foobar' }
+    { author_id: 1, body: 'foobar' }
   end
 
-  let(:authors) { ['test author'] }
+  let(:titles) { ['test title'] }
 
   describe "#create" do
     subject do
-      repo.create(params.merge(author: 'creation test author'))
+      repo.create(params.merge(title: 'creation test title'))
     end
 
     it "creates a record" do
@@ -33,14 +33,14 @@ describe Repos::Stories do
     subject { repo.all }
 
     it "retrieves all the records" do
-      expect(subject.map(&:author)).to match_array(authors)
+      expect(subject.map(&:title)).to match_array(titles)
     end
   end
 
   describe "#[]" do
     subject { repo[second_to_last_id] }
 
-    let(:authors)           { %w(new test foo bar ultimate penultimate) }
+    let(:titles)           { %w(new test foo bar ultimate penultimate) }
     let(:second_to_last)    { repo.all.last(2).first }
     let(:second_to_last_id) { second_to_last.id }
 

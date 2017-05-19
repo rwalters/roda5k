@@ -9,6 +9,10 @@ module Relations
       attribute :bio,         Types::String
       attribute :created_at,  TIMESTAMP
       attribute :updated_at,  TIMESTAMP
+
+      associations do
+        has_many :books
+      end
     end
 
     def delete_all

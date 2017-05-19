@@ -8,15 +8,15 @@ describe Story do
   end
 
   let(:params) do
-    { id: id, author: author, title: title, body: body, created_at: c_at, updated_at: u_at }
+    { id: id, author_id: author_id, title: title, body: body, created_at: c_at, updated_at: u_at }
   end
 
-  let(:id)      { 1 }
-  let(:author)  { "valid" }
-  let(:title)   { "valid" }
-  let(:body)    { "valid" }
-  let(:c_at)    { Time.now }
-  let(:u_at)    { Time.now }
+  let(:id)        { 1 }
+  let(:author_id) { 1 }
+  let(:title)     { "valid" }
+  let(:body)      { "valid" }
+  let(:c_at)      { Time.now }
+  let(:u_at)      { Time.now }
 
   it "exists" do
     expect{subject}.not_to raise_error
@@ -39,19 +39,19 @@ describe Story do
       end
     end
 
-    context "author with integer" do
-      let(:author) { 12 }
+    context "author_id with String" do
+      let(:author_id) { "invalid" }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(Fixnum\) has invalid type for :author/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(String\) has invalid type for :author_id/)
       end
     end
 
-    context "author with nil" do
-      let(:author) { nil }
+    context "author_id with nil" do
+      let(:author_id) { nil }
 
       it "raises an error" do
-        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :author/)
+        expect{subject}.to raise_error(Dry::Struct::Error, /\(NilClass\) has invalid type for :author_id/)
       end
     end
 

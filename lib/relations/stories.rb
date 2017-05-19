@@ -4,11 +4,15 @@ module Relations
 
     schema(:stories) do
       attribute :id,          Types::Serial
-      attribute :author,      Types::String
+      attribute :author_id,   Types::Int
       attribute :title,       Types::String
       attribute :body,        Types::String
       attribute :created_at,  TIMESTAMP
       attribute :updated_at,  TIMESTAMP
+
+      associations do
+        belongs_to :author
+      end
     end
 
     def delete_all
@@ -26,7 +30,7 @@ module Relations
     def all
       debug("Get All Stories")
 
-      order(:author, :title, :id)
+      order(:title, :id)
     end
 
     private

@@ -6,8 +6,8 @@ describe Relations::Stories do
   let(:stories) { repo.stories }
 
   before(:each) do
-    authors.each do |name|
-      repo.create(params.merge(author: name))
+    titles.each do |title|
+      repo.create(params.merge(title: title))
     end
   end
 
@@ -15,9 +15,9 @@ describe Relations::Stories do
     repo.delete_all
   end
 
-  let(:authors) { %w(new test foo bar ultimate penultimate) }
+  let(:titles) { %w(new test foo bar ultimate penultimate) }
   let(:params) do
-    { title: 't title', body: 'body blah' }
+    { author_id: 1, body: 'body blah' }
   end
 
 
@@ -27,8 +27,8 @@ describe Relations::Stories do
     end
     let(:book_record) { repo.all.first }
 
-    it "finds the right author" do
-      expect(subject.first.author).to eq(authors.sort.first)
+    it "finds the right title" do
+      expect(subject.first.title).to eq(titles.sort.first)
     end
   end
 
@@ -37,14 +37,14 @@ describe Relations::Stories do
       stories.all.to_a
     end
 
-    let(:authors) { ['test author', 'different author'] }
+    let(:titles) { ['test title', 'different title'] }
 
     it "exists" do
       expect(subject.count).to eq(2)
     end
 
     it "is the correct order" do
-      expect(subject.map(&:author)).to match_array(authors.sort)
+      expect(subject.map(&:title)).to match_array(titles.sort)
     end
   end
 end
